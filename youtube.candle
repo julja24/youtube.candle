@@ -1,0 +1,28 @@
+// YouTube Candle Plugin for Lampa TV
+// Автор: julja24
+// Версия: 1.0
+
+function search(query) {
+    const videoId = extractYouTubeId(query);
+    if (!videoId) return [];
+
+    return [{
+        name: YouTube видео: ${videoId},
+        video: {
+            streams: [{
+                url: https://www.youtube.com/watch?v=${videoId},
+                quality: "HD",
+                format: "YouTube",
+                external: true // Откроется в YouTube-приложении или браузере
+            }]
+        },
+        description: "Видео откроется во внешнем плеере (YouTube).",
+        poster: https://img.youtube.com/vi/${videoId}/hqdefault.jpg
+    }];
+}
+
+function extractYouTubeId(url) {
+    const regex = /(?:youtube\.com\/.*v=|youtu\.be\/)([\w-]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
